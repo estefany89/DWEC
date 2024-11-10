@@ -1,0 +1,21 @@
+<!--Escribe una función que reciba como argumento un array y que devuelva una cadena de
+caracteres formada por los elementos del array separados por un guión
+Si llamamos a la función como listar(["rojo", "verde", "azul") deberá devolver "rojo-verdeazul"-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8</title>
+</head>
+<body>
+    <script>
+        function listar(array) {
+            let lista = array.join("-");
+            return lista;
+        }
+        alert(listar(['verde', 'rojo', 'azul']));
+    </script>
+</body>
+</html>
