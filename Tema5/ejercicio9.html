@@ -1,0 +1,30 @@
+<!--Un servicio de atención al ciente tiene establecido turnos semanales para sus
+empleados de manera que cada día de la semana se encarga del servicio una
+persona: lunes - María, Martes - Luis, Miércoles - Antonia, Jueves - Pedro, Viernes -
+Marisa.-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 9</title>
+</head>
+<body>
+    <script>
+        function servicio(dia) {
+            let turnos = [["lunes", "María"],["martes", "Luis"],["miércoles", "Antonia"],["jueves", "Pedro"],["viernes", "Marisa"]];
+
+            dia = dia.toLowerCase();
+            for (let i = 0; i < turnos.length; i++) {
+                if (turnos[i][0] === dia) {
+                    return "Este día se encarga ${turnos[i][1]}";
+                }
+            }
+            return "No hay servicio";
+        }
+
+        console.log(servicio("Lunes"));
+    </script>
+</body>
+</html>
