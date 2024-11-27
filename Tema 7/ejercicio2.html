@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Provincia de Cádiz</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+        input.error, select.error {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registro de personas - Provincia de Cádiz</h1>
+    <form id="registro" action="grabar.php" method="POST">
+        <label for="usuario">Nombre de Usuario:</label>
+        <input type="text" id="usuario" name="usuario" required>
+        <span class="error" id="error-usuario"></span>
+        <br><br>
+
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena" required>
+        <span class="error" id="error-contrasena"></span>
+        <br><br>
+
+        <label for="poblacion">Población:</label>
+        <select id="poblacion" name="poblacion" required>
+            <option value="">- Seleccione -</option>
+            <option value="Alcalá de los Gazules">Alcalá de los Gazules</option>
+            <option value="Alcalá del Valle">Alcalá del Valle</option>
+            <option value="Algeciras">Algeciras</option>
+            <option value="Barbate">Barbate</option>
+            <option value="Cádiz">Cádiz</option>
+            <option value="Chiclana de la Frontera">Chiclana de la Frontera</option>
+            <option value="Chipiona">Chipiona</option>
+            <option value="Conil de la Frontera">Conil de la Frontera</option>
+            <option value="El Puerto de Santa María">El Puerto de Santa María</option>
+            <option value="Jerez de la Frontera">Jerez de la Frontera</option>
+            <option value="La Línea de la Concepción">La Línea de la Concepción</option>
+            <option value="Medina-Sidonia">Medina-Sidonia</option>
+            <option value="Puerto Real">Puerto Real</option>
+            <option value="Rota">Rota</option>
+            <option value="San Fernando">San Fernando</option>
+            <option value="Sanlúcar de Barrameda">Sanlúcar de Barrameda</option>
+            <option value="Tarifa">Tarifa</option>
+            <option value="Ubrique">Ubrique</option>
+            <option value="Vejer de la Frontera">Vejer de la Frontera</option>
+            <option value="Villamartín">Villamartín</option>
+        </select>
+        <span class="error" id="error-poblacion"></span>
+        <br><br>
+
+        <button type="submit">Registrar</button>
+    </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const formulario = document.getElementById("registro");
+            const usuario = document.getElementById("usuario");
+            const contrasena = document.getElementById("contrasena");
+            const poblacion = document.getElementById("poblacion");
+
+            const errorUsuario = document.getElementById("error-usuario");
+            const errorContrasena = document.getElementById("error-contrasena");
+            const errorPoblacion = document.getElementById("error-poblacion");
+
+            function validarUsuario() {
+                if (usuario.value.trim().length < 8 || /\s/.test(usuario.value)) {
+                    errorUsuario.textContent = "El nombre de usuario debe tener al menos 8 caracteres sin espacios.";
+                    usuario.classList.add("error");
+                    return false;
+                }
+                errorUsuario.textContent = "";
+                usuario.classList.remove("error");
+                return true;
+            }
+
+            function validarContrasena() {
+                const regex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,10}$/;
+                if (!regex.test(contrasena.value)) {
+                    errorContrasena.textContent = "La contraseña debe tener entre 6 y 10 caracteres, al menos una letra mayúscula y un dígito.";
+                    contrasena.classList.add("error");
+                    return false;
+                }
+                errorContrasena.textContent = "";
+                contrasena.classList.remove("error");
+                return true;
+            }
+
+            function validarPoblacion() {
+                if (poblacion.value === "") {
+                    errorPoblacion.textContent = "Debe seleccionar una población.";
+                    poblacion.classList.add("error");
+                    return false;
+                }
+                errorPoblacion.textContent = "";
+                poblacion.classList.remove("error");
+                return true;
+            }
+
+            formulario.addEventListener("submit", (e) => {
+                const esValido = validarUsuario() && validarContrasena() && validarPoblacion();
+                if (!esValido) {
+                    e.preventDefault();
+                }
+            });
+
+            usuario.addEventListener("input", validarUsuario);
+            contrasena.addEventListener("input", validarContrasena);
+            poblacion.addEventListener("change", validarPoblacion);
+        });
+    </script>
+</body>
+</html>

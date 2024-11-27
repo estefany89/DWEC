@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+        input.error {
+            border: 1px solid red;
+        }
+        button:disabled {
+            background-color: gray;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formulario de Creación de Cuenta</h1>
+    <form id="form">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" required>
+        <span class="error" id="error-nombre"></span>
+        <br><br>
+
+        <label for="email">Correo:</label>
+        <input type="email" id="email" required>
+        <span class="error" id="error-email"></span>
+        <br><br>
+
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" required>
+        <span class="error" id="error-password"></span>
+        <br><br>
+
+        <label for="repassword">Repetir Contraseña:</label>
+        <input type="password" id="repassword" required>
+        <span class="error" id="error-repassword"></span>
+        <br><br>
+
+        <p>¿Cuánto es <span id="operacion"></span>?</p>
+        <input type="number" id="captcha" required>
+        <span class="error" id="error-captcha"></span>
+        <br><br>
+
+        <label>
+            <input type="checkbox" id="condiciones"> Acepto las condiciones
+        </label>
+        <br><br>
+
+        <button type="submit" id="submit" disabled>Crear cuenta</button>
+    </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("form");
+            const nombre = document.getElementById("nombre");
+            const email = document.getElementById("email");
+            const password = document.getElementById("password");
+            const repassword = document.getElementById("repassword");
+            const captcha = document.getElementById("captcha");
+            const condiciones = document.getElementById("condiciones");
+            const submit = document.getElementById("submit");
+
+            const errorNombre = document.getElementById("error-nombre");
+            const errorEmail = document.getElementById("error-email");
+            const errorPassword = document.getElementById("error-password");
+            const errorRepassword = document.getElementById("error-repassword");
+            const errorCaptcha = document.getElementById("error-captcha");
+
+            let num1 = Math.floor(Math.random() * 10);
+            let num2 = Math.floor(Math.random() * 10);
+            const operacion = document.getElementById("operacion");
+            operacion.textContent = `${num1} + ${num2}`;
+
+            function validarNombre() {
+                if (nombre.value.trim() === "") {
+                    errorNombre.textContent = "El nombre no puede estar vacío.";
+                    nombre.classList.add("error");
+                    return false;
+                }
+                errorNombre.textContent = "";
+                nombre.classList.remove("error");
+                return true;
+            }
+
+            function validarEmail() {
+                const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!regex.test(email.value)) {
+                    errorEmail.textContent = "El correo debe ser válido.";
+                    email.classList.add("error");
+                    return false;
+                }
+                errorEmail.textContent = "";
+                email.classList.remove("error");
+                return true;
+            }
+
+            function validarPassword() {
+                if (password.value.length < 8 || !/\d/.test(password.value)) {
+                    errorPassword.textContent = "La contraseña debe tener al menos 8 caracteres y un dígito.";
+                    password.classList.add("error");
+                    return false;
+                }
+                errorPassword.textContent = "";
+                password.classList.remove("error");
+                return true;
+            }
+
+            function validarRepassword() {
+                if (password.value !== repassword.value) {
+                    errorRepassword.textContent = "Las contraseñas deben coincidir.";
+                    repassword.classList.add("error");
+                    return false;
+                }
+                errorRepassword.textContent = "";
+                repassword.classList.remove("error");
+                return true;
+            }
+
+            function validarCaptcha() {
+                if (parseInt(captcha.value) !== num1 + num2) {
+                    errorCaptcha.textContent = "El resultado de la operación es incorrecto.";
+                    captcha.classList.add("error");
+                    return false;
+                }
+                errorCaptcha.textContent = "";
+                captcha.classList.remove("error");
+                return true;
+            }
+
+            function habilitarBoton() {
+                submit.disabled = !condiciones.checked;
+            }
+
+            nombre.addEventListener("input", validarNombre);
+            email.addEventListener("input", validarEmail);
+            password.addEventListener("input", validarPassword);
+            repassword.addEventListener("input", validarRepassword);
+            captcha.addEventListener("input", validarCaptcha);
+            condiciones.addEventListener("change", habilitarBoton);
+
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const esValido = validarNombre() && validarEmail() && validarPassword() && validarRepassword() && validarCaptcha();
+                if (esValido) {
+                    alert("Formulario enviado correctamente.");
+                    form.reset();
+                    submit.disabled = true;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
