@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Completo</title>
+    <script src="validaciones.js" defer></script>
+    <style>
+        /* Estilos para separar los campos de formulario */
+        .campo {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <form id="formulario" onsubmit="return validacion()">
+        <fieldset>
+            <legend>Datos Personales</legend>
+            <div class="campo">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" size="30">
+            
+
+                <label for="primerApellido">*Primer Apellido:</label>
+                <input type="text" id="primerApellido" name="primerApellido" size="30" required>
+
+                <label for="segundoApellido">*Segundo Apellido:</label>
+                <input type="text" id="segundoApellido" name="segundoApellido" size="30" required>
+            </div>
+      
+            <div class="campo">
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion" size="50" placeholder="calle o plaza, número o piso" required>
+            </div>
+
+            <div class="campo">
+                <label for="telefono">Teléfono*:</label>
+                <input type="tel" id="telefono" name="telefono" size="20" placeholder="123 33 33 33" required>
+            </div>
+
+            <div class="campo">
+                <label for="email">Email*:</label>
+                <input type="email" id="email" name="email" size="30" placeholder="ejemplo@ejemplo.com" required>
+            </div>
+
+            <div class="campo">
+                <label for="password">Contraseña*:</label>
+                <input type="password" id="password" name="password" size="30" required>
+            </div>
+
+            <div>
+                <label>Sexo:</label>
+                <br>
+                <input type="radio" id="hombre" name="sexo" value="Hombre" required>
+                <label for="hombre">Hombre</label>
+                <br>
+                <input type="radio" id="mujer" name="sexo" value="Mujer" required>
+                <label for="mujer">Mujer</label>
+                <br>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Nivel de estudios e interés</legend>
+            <label>Nivel de estudios:</label>
+            <br>
+            <input type="radio" id="certificado" name="estudios" value="certificado escolar" required>
+            <label for="certificado">Certificado escolar</label>
+            <br>
+            <input type="radio" id="graduado" name="estudios" value="graduado en E.S.O" required>
+            <label for="graduado">Graduado en E.S.O</label>
+            <br>
+            <input type="radio" id="bachiller" name="estudios" value="Bachiller formación" required>
+            <label for="bachiller">Bachiller-Formación Profesional</label>
+            <br>
+            <input type="radio" id="diplomado" name="estudios" value="diplomado" required>
+            <label for="diplomado">Diplomado</label>
+            <br>
+            <input type="radio" id="licenciado" name="estudios" value="licenciado o doctorado" required>
+            <label for="licenciado">Licenciado o Doctorado</label>
+            <br>
+
+            <div class="campo">
+                <p>Recibir artículos sobre los siguientes temas:</p>
+                <label>
+                    <input type="checkbox" name="revista" value="Musica"> Música
+                </label>
+                <br>
+                <label>
+                    <input type="checkbox" name="revista" value="Deporte"> Deporte
+                </label>
+                <br>
+                <label>
+                    <input type="checkbox" name="revista" value="Cine"> Cine
+                </label>
+                <br>
+                <label>
+                    <input type="checkbox" name="revista" value="Libros"> Libros
+                </label>
+                <br>
+                <label>
+                    <input type="checkbox" name="revista" value="Ciencia"> Ciencia
+                </label>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Datos sobre la revista</legend>
+            <p>Frecuencia con la que se recibirá la revista:</p>
+            <select name="frecuencia" id="frecuencia">
+                <option value="semanal">Semanal</option>
+                <option value="mensual">Mensual</option>
+                <option value="trimestral">Trimestral</option>
+            </select>
+            <br><br>
+
+            <p>Puedes mandar tu artículo sobre cualquier tema de lo que tratamos. Nosotros lo valoraremos para que pueda ser publicado.</p>
+            <label for="articulo">Mandar artículo:</label>
+            <input type="file" id="articulo" name="articulo">
+            <span id="archivoSeleccionado"></span>
+            <br><br>
+
+            <p>Si deseas mandar simplemente una opinión o comentario, escríbelo aquí:</p>
+            <textarea id="comentario" name="comentario" rows="4" placeholder="Escribe tu comentario" required></textarea>
+            <br><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Comenzar de nuevo</legend>
+            <p>Borrar todos los datos del formulario y volver a empezar</p>
+            <button type="reset">Borrar todo</button>
+        </fieldset>
+
+        <fieldset>
+            <legend>Enviar</legend>
+            <p>Enviar formulario por correo electrónico: Al pulsar en el botón se abrirá la página de envío de correo: en esa página pulsa enviar.</p>
+            <button type="submit">Enviar por correo</button>
+        </fieldset>
+    </form>
+</body>
+</html>
