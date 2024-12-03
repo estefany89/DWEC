@@ -1,1 +1,21 @@
-
+## FORMULARIO COMPLETO
+Realizar un formulario completo tal y como se muestra a continuación en las instrucciones
+e imágenes. Comentar las líneas de código.
+• Debe mostrar los valores por defecto que aparecen en la imagen.
+• Todos los campos input text y textarea tienen que tener un control de validación de
+formato.
+• Todos los campos obligatorios (no vacíos) marcados con asterisco tienen que tener un
+control de validación de que se ha elegido alguna opción o está no vacío.
+• La validación del formulario ocurrirá al pinchar en el botón de envío de datos del
+formulario “Enviar por correo”.
+• La acción asociada al botón “Enviar por correo” debe ser una llamada a una función
+denominada “validación”, en el atributo action del form.
+• Al pinchar en el botón “Enviar por correo”, en caso de que los datos de algún o algunos
+campos del formulario no hayan sido introducidos correctamente por el usuario, la
+función debe mostrar por pantalla una ventanita con un mensaje listando todos los
+errores cometidos por el usuario. Al cerrar dicha ventana de aviso, el cursor debe
+situarse en el primer campo del formulario cuyos datos han sido introducidos
+erróneamente.
+• Al pinchar en el botón “Enviar por correo”, en caso de que todos los datos hayan sido
+introducidos correctamente por el usuario, la función debe mostrar una ventanita con
+el mensaje “Datos enviados correctamente”.
