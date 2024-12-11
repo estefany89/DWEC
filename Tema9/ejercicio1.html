@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Números Curiosos</title>
+    <script src="funciones.js"></script>
+</head>
+<body>
+    <h1>Números Curiosos</h1>
+    <script>
+        let numerosCuriosos = []; //Declara un array vacio
+        for (let i = 1; numerosCuriosos.length < 5; i++) { //Es un bucle for que comienza en 1 y sigue que tenga menos de 5 elementos.
+            if (esCurioso(i)) numerosCuriosos.push(i); //El bucle, verifica si el número i cumple la condición de "curioso". Si es así, lo agrega al array numerosCuriosos.
+        }
+        alert("Los 5 primeros números curiosos son: " + numerosCuriosos.join(", "));//muestra los 5 nc
+    </script>
+</body>
+</html>
+
+

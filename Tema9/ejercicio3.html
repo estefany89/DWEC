@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cifrado César</title>
+</head>
+<body>
+    <h1>Cifrado César</h1>
+    <h2>-Descifrar-</h2>
+
+    <label for="opcion_alfabeto">Alfabeto</label>
+    <select id="opcion_alfabeto" name="opcion_alfabeto" onchange="actualizarMaxRot()"> 
+        <!--onchange: Es un evento de HTML que se activa cuando el valor de un elemento cambia.
+         MaxRot: Es el nombre de la función que será llamada cuando ocurra el evento.-->
+        <option value="castellano">Castellano</option>
+        <option value="ingles">Inglés</option>
+    </select><br><br>
+
+    <label for="descifrar">Texto a descifrar</label>
+    <textarea id="texto" name="descifrar" rows="3" cols="30"></textarea><br><br>
+
+    <label for="rot">Nivel de rotado</label>
+    <input type="number" id="rot" name="rot" min="0" max="26" value="0"><br><br>
+
+    <button type="button" onclick="descifrar()">Descifrar</button>
+
+    <h3>Texto descifrado:</h3>
+    <p id="resultado"></p>
+
+    <script>
+        // Diccionario con el objeto de los alfabetos disponibles
+        const alfabetos = {
+            'castellano': 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ', 
+            'ingles': 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        };
+
+        function actualizarMaxRot() {
+            // Alfabeto seleccionado (castellano/ingles)
+            let alfabeto = document.getElementById("opcion_alfabeto").value;
+
+            // Asigna el número de rotación máxima dependiendo del alfabeto seleccionado
+            document.getElementById("rot").max = alfabetos[alfabeto].length - 1;
+        }
+
+        function descifrar() {
+            // Alfabeto seleccionado (castellano/ingles)
+            let alfabeto = document.getElementById("opcion_alfabeto").value;
+
+            // Accede al valor del diccionario para guardar el alfabeto que se quiere usar
+            let alfabeto_seleccionado = alfabetos[alfabeto];
+
+            // Guarda el nivel de rotacion
+            let rot = parseInt(document.getElementById("rot").value);
+
+            // Guarda el texto a descifrar
+            let texto = document.getElementById("texto").value;
+
+            // Inicializa el string en el que se va a guardar el resultado
+            let resultado = '';
+
+            // Recorre el texto letra a letra
+            for (let i = 0; i < texto.length; i++) {
+                // Guardo la letra en la que me encuentro
+                let letra = texto.charAt(i);
+
+                // Guardo el índice de la letra en el alfabeto (devuelve -1 si no encuentra la letra)
+                let indice = alfabeto_seleccionado.indexOf(letra.toUpperCase());
+
+                // Si encuentra la letra, actualizo el índice
+                if (indice !== -1) {
+                    // Calcular el nuevo índice
+                    let nuevoIndice = (indice - rot + alfabeto_seleccionado.length) % alfabeto_seleccionado.length;
+
+                    // Conservo las mayúsculas y minúsculas
+                    resultado += letra === letra.toUpperCase() 
+                        ? alfabeto_seleccionado[nuevoIndice] 
+                        : alfabeto_seleccionado[nuevoIndice].toLowerCase();
+
+                } else {
+                    // Si no encuentra la letra, se queda igual
+                    resultado += letra;
+                }
+            }
+
+            // Muestro el texto descifrado
+            document.getElementById("resultado").textContent = resultado;
+        }
+    </script>
+</body>
+</html>
+
