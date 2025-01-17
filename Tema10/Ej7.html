@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ej7</title>
+</head>
+<body>
+  <p>
+    <label for="valor1">Ingrese primer valor:</label>
+    <input type="number" id="valor1" />
+  </p>
+  <p>
+    <label for="valor2">Ingrese segundo valor:</label>
+    <input type="number" id="valor2" />
+  </p>
+  <p>
+    <input type="checkbox" id="suma" /> Sumar
+  </p>
+  <p>
+    <input type="checkbox" id="resta" /> Restar
+  </p>
+  <p>
+    <input type="button" value="Operar" id="calculo" />
+  </p>
+  <p id="resultado"></p>
+
+  <script>
+    function obtenerValores() {
+        const num1 = parseFloat(document.getElementById('valor1').value);
+        const num2 = parseFloat(document.getElementById('valor2').value);
+        return { num1, num2 };
+    }
+
+    function operar() {
+        const { num1, num2 } = obtenerValores();
+        const suma = document.getElementById('suma').checked;
+        const resta = document.getElementById('resta').checked;
+        const resultadoElem = document.getElementById('resultado');
+
+        if (isNaN(num1) || isNaN(num2)) {
+            resultadoElem.textContent = "Por favor, ingrese valores válidos."; 
+            return;
+        }
+
+        let resultados = [];
+        if (suma) {
+            resultados.push(`La suma es: ${num1 + num2}`);
+        }
+        if (resta) {
+            resultados.push(`La diferencia es: ${num1 - num2}`);
+        }
+        if (resultados.length > 0) {
+            resultadoElem.innerHTML = resultados.join("<br>");
+        } else {
+            resultadoElem.textContent = "Seleccione al menos una operación.";
+        }
+    }
+
+    document.getElementById('calculo').addEventListener('click', operar);
+  </script>
+</body>
+</html>
+
+
