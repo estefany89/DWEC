@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ej10</title>
+</head>      
+<body>
+    <form action="#" method="post" id="formulario">
+      <p>
+        <label for="usuario">Ingrese email:</label>
+        <input type="email" id="email" />
+        <span id="resultado1"></span>
+      </p>
+      <p>
+        <label for="sitio">Ingrese sitio web:</label>
+        <input type="url" id="url" />
+        <span id="resultado2"></span>
+      </p>
+      <p>
+        <input type="submit" value="confirmar" id="confirmar" />
+      </p>
+    </form>
+
+    <script>
+      const formulario = document.getElementById('formulario');
+      const emailInput = document.getElementById('email');
+      const urlInput = document.getElementById('url');
+      const resultado1 = document.getElementById('resultado1');
+      const resultado2 = document.getElementById('resultado2');
+
+      formulario.addEventListener('submit', function(event) {
+        let isValid = true;
+
+        if (!emailInput.checkValidity()) {
+          resultado1.textContent = 'Por favor, ingrese un email válido.';
+          resultado1.style.color = 'red';
+          isValid = false;
+        } else {
+          resultado1.textContent = 'Email válido.';
+          resultado1.style.color = 'green';
+        }
+
+        if (!urlInput.checkValidity()) {
+          resultado2.textContent = 'Por favor, ingrese un sitio web válido.';
+          resultado2.style.color = 'red';
+          isValid = false;
+        } else {
+          resultado2.textContent = 'URL válida.';
+          resultado2.style.color = 'green';
+        }
+
+        if (!isValid) {
+          event.preventDefault();
+        }
+      });
+    </script>
+  
+</body>
+  
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ej11</title>
+</head>
+<body>
+  <button id="addNumber">Nuevo número</button>
+  <ul id="numberList"></ul>
+  <script>
+    document.getElementById("addNumber").addEventListener("click", function () {
+      const list = document.getElementById("numberList");
+      const newItem = document.createElement("li");
+      newItem.textContent = Math.floor(Math.random() * 100) + 1;
+      list.appendChild(newItem);
+    });
+  </script>
+</body>
+</html>
