@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ej 14</title>
+    <style>
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="p1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem esse dicta alias dolore odio odit iusto facilis harum tempora labore, rem doloribus dolorum consequatur modi praesentium commodi blanditiis quo cupiditate.</p>
+    <p id="p2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem esse dicta alias dolore odio odit iusto facilis harum tempora labore, rem doloribus dolorum consequatur modi praesentium commodi blanditiis quo cupiditate.</p>
+    <p id="p3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem esse dicta alias dolore odio odit iusto facilis harum tempora labore, rem doloribus dolorum consequatur modi praesentium commodi blanditiis quo cupiditate.</p>
+    <button id="reappear">Reaparecer</button>
+
+    <script>
+      var paragraphs = document.querySelectorAll("p");
+      var reappearButton = document.getElementById("reappear");
+
+      var hiddenElements = new Set();
+
+      paragraphs.forEach(function (paragraph) {
+        paragraph.addEventListener("click", function () {
+          paragraph.classList.add("hidden");
+          hiddenElements.add(paragraph);
+        });
+
+        paragraph.addEventListener("dblclick", function () {
+          paragraph.remove();
+          hiddenElements.delete(paragraph);
+        });
+      });
+
+      reappearButton.addEventListener("click", function () {
+        hiddenElements.forEach(function (paragraph) {
+          paragraph.classList.remove("hidden");
+        });
+      });
+    </script>
+  </body>
+</html>
