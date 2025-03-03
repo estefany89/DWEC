@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+    
+    <!--Estilo-->
+    <style>
+        #letra {
+            width: 20px;
+        }
+
+        #mensaje {
+            color: red;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #formulario {
+            margin: 0 auto;
+            width: 30%;
+            display: block;
+
+        }
+    </style>
+</head>
+<!--Formulario-->
+<body>
+    <h1>Formulario de captura de datos</h1>
+    <form id="formulario">
+        Nombre completo: <input type="text" name="nombre" id="nombre" required> *<br> <!--nombre-->
+        DNI: <input type="text" name="dni" id="dni" maxlength="8" required> * <input type="text" name="letra" id="letra" maxlength="1"><br>
+        Contraseña: <input type="password" name="contrasena" id="contrasena" required> *<br>  <!--contraseña-->
+        Población: <select name="poblacion" id="poblacion">  <!--población-->
+            <option value="0" selected>- Seleccione -</option> <!--opciones de las poblaciones-->
+            <option value="1">Alcalá de los Gazules</option>
+            <option value="2">Benaocaz</option>
+            <option value="3">Medina Sidonia</option>
+            <option value="4">Tarifa</option>
+            <option value="5">Vejer de la Frontera</option>
+            <option value="6">Otros – Fuera de Cádiz</option>
+
+        </select> *<br>
+        Contacto: <input type="radio" name="contacto" id="contacto_telefono" value="telefono"> Por correo ordinario  <!--contacto-->
+        <input type="radio" name="contacto" id="contacto_email" value="email" checked> Email<br>
+        Comentarios/Preguntas: <textarea name="comentarios" id="comentarios" cols="30" rows="10"></textarea><br>  <!--comentarios-->
+        <p>Atención: todos los campos marcados con * son obligatorios para su correcto tratamiento</p>
+        <input type="button" id="botonEnvio" value="Enviar Solicitud">  <!--botón enviar-->
+        <p id="mensaje"></p>
+
+    </form>
+
+    <script>
+
+        const boton = document.querySelector('#botonEnvio');  //obtengo el botón del documento
+
+        boton.addEventListener('click', function () { //addEventListener es para asignar una función a un evento del elemento.  (programo lo que pasa cuando se hace clic en él)
+
+            const mensaje = document.querySelector('#mensaje');
+            mensaje.textContent = "";
+
+            //aquí voy haciendo validaciones...
+
+            if (!validarNombre()) return; // if (validarNombre() == false) return;
+
+            if (!validarDni()) return; //corto la validación si el dni fue mal
+
+            if (!validarContrasena()) return; //aquí tienes que hacer la validación de la contraseña         
+
+            if (!validarPoblacion()) return;
+
+            alert("Se envió el formulario correctamente!!!");  //si llega aquí es que todo fue bien:
+
+        });
+
+        
+        //validación del nombre
+        function validarNombre() {
+            const nombre = document.querySelector('#nombre').value;   //obtengo el valor (contenido) del cuadro de texto nombre
+
+            if (nombre == "") {
+                const mensaje = document.querySelector('#mensaje');
+                mensaje.textContent = "Error, el nombre no puede estar vacío";
+                const inputNombre = document.querySelector('#nombre');  //esto es el propio cuadro de texto (no solo el contenido)
+                inputNombre.focus();
+                return false; //hubo problemas con la validación
+            }
+            return true;  //ha ido todo bien
+        }
+
+        //validar dni
+        function validarDni() {
+                const dni = document.querySelector('#dni').value; // llama a ID DNI
+                const letra = document.querySelector('#letra').value;
+                let expresion = dni + letra + "";
+                let cumple = expresion.match(/[0-9]{8}[A-Za-z]{1}/); // expresión que debe cumplir
+
+                // console.log(cumple);   //IMPORTANTE: usa log si algo no te sale, para ver qué valor está tomando la variable!!!!
+
+            if (cumple == null) {
+                const mensaje = document.querySelector('#mensaje'); // llama al mensaje
+                mensaje.textContent = "Debe poner 8 números y una letra en el DNI";
+                const inputDni = document.querySelector('#dni');
+                inputDni.focus();
+                return false; //hubo problemas con la validación
+            }
+
+            return true;
+
+        }
+
+            function validarContrasena() {
+            const contrasena = document.querySelector('#contrasena').value; // llama a ID contaseña
+            let expresion = /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/; //expresion a cumplir
+            let cumple2 = contrasena.match(expresion);
+
+            if (cumple2 == null) {
+                const mensaje = document.querySelector('#mensaje'); //mensaje 
+                mensaje.textContent = "La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un carácter no alfanumérico.";
+                const inputContrasena = document.querySelector('#contrasena');
+                inputContrasena.focus();
+                return false; // Hubo problemas con la validación
+            }
+            return true;
+        }
+
+       
+        //validar población
+        function validarPoblacion() {
+            const poblacion = document.querySelector('#poblacion').value; // llama a ID población
+
+            if (poblacion == 0) {
+                const mensaje = document.querySelector('#mensaje'); //mensaje que se mostrara
+                mensaje.textContent = "Error, debe seleccionar una población";
+                const selectPoblacion = document.querySelector('#poblacion');
+                selectPoblacion.focus();
+                return false; //hubo problemas con la validación
+            }
+
+            return true;
+        }
+           
+    </script>
+
+</body>
+
+</html>
