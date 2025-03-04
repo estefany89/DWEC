@@ -6,24 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 2</title>
 </head>
-    <h1>Convertir palabra</h1>
+
 <body>
+    <h1>Convertir texto</h1>
     <!--cuadros texarea-->
     <textarea id="textonormal" rows="10" cols="50"></textarea>
     <br>
-    <button onclick="convertir()"> Convertir </button>
+    <button onclick="convertir()">Convertir</button>
     <br>
     <textarea id="textoconvertido" rows="10" cols="50"></textarea>
+
 
     <script>
         //agrego nuevo método llamado desorganiza a la clase String
         String.prototype.desorganiza = function () {
             var cadena = this; //guardo la palabra en la variable cadena
-            if (cadena.length <= 2) {
-                return cadena; // Si la palabra tiene 2 o menos caracteres, no se cambia
-            }
+            var letraPrimera = cadena.charAt(0); //cojo la letra inicial de la palabra
+            var letraUltima = cadena.charAt(this.length - 1); //cojo la letra final de la palabra
             for (var i = 0; i < 100; i++) { // bucle que se repite 100 veces
-                var pos1 = Math.floor(Math.random() * (cadena.length - 2)) + 1; //genera una posición aleatoria dentro de un rango *2 y 1 suma vg
+                //genero un número entre la posición 1 y la penúltima posición de la palabra
+                var pos1 = Math.floor(Math.random() * (cadena.length - 2)) + 1;
                 var pos2 = Math.floor(Math.random() * (cadena.length - 2)) + 1;
                 if (pos1 != pos2) {
                     // quiero que pos1 sea menor que pos2...
@@ -38,6 +40,7 @@
                     var parte3 = cadena.substring(pos2 + 1); // trozo de palabra desde el segundo caracter al final
                     cadena = parte1 + cadena.charAt(pos2) + parte2 + cadena.charAt(pos1) + parte3; // concateno las partes
                 }
+
             }
             return cadena; // devuelvo la palabra desorganizada
         };
@@ -46,13 +49,20 @@
             var textoNormal = document.getElementById("textonormal").value;  // cojo el texto del textarea
             var palabras = textoNormal.split(" "); // creo un array de palabras separando la cadena por espacios
             var textoConvertido = ""; //ahora voy concatenando palabras desorganizadas
-            for (var i = 0; i < palabras.length; i++) { // recorre todos los elementos del array
-                var palabrades = palabras[i].desorganiza();  //desorganizo la palabra
-                // Si la palabra es muy corta, no la cambiamos (esto ya lo hace el método desorganiza)
-                textoConvertido += palabrades + " "; //agrego la palabra desorganizada al texto
+            for (var i = 0; i < palabras.length; i++) {
+                var palabrades = palabras[i];
+                if (palabrades.length > 3) { //si la longitud de la palabra es menor o igual a 3, no la desorganizo ( las palabras de longitud 2 o 3 no cambian))  
+                    palabrades = palabras[i].desorganiza();  //desorganizo la palabra, pero si sale igual, la vuelvo a desorganizar
+                    while (palabrades == palabras[i]) { //repito si sale la misma palabra
+                        palabrades = palabras[i].desorganiza();
+                    }
+                }
+                textoConvertido += palabrades + " ";
             }
-            document.getElementById("textoconvertido").value = textoConvertido.trim(); // muestro el texto convertido
+            document.getElementById("textoconvertido").value = textoConvertido; // muestro el texto convertido
         }
+
+
     </script>
 </body>
 
